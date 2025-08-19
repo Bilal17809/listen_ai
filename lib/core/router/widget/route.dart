@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:listen_ai/core/router/widget/routing.dart';
 
 import '../../../presentation/Home/screen/home_screen.dart';
-import '../../../presentation/add_content/screen/add_content.dart';
+import '../../../presentation/add_content/view/add_content.dart';
 
 class Routes {
+
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       // case RoutesName.splashPage:

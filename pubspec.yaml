@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   velocity_x: ^4.3.1
   get: ^4.7.2
+  file_picker: ^8.0.0
+  google_mlkit_text_recognition: ^0.15.0
+  image_picker: ^1.0.7
+
+
+
 
 dev_dependencies:
   flutter_test:
