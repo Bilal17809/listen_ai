@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:listen_ai/presentation/add_content/screen/add_content.dart';
+
+
+import 'core/services/category_services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
 
       ),
-      home:  AddContent(),
+      home: MainBottomBar(),
     );
   }
 }

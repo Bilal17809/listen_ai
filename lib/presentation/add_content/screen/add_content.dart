@@ -53,12 +53,7 @@ class AddContent extends StatelessWidget {
           ).box.rounded.size(screenw*1, screenh*0.65).color(kWhite).make(),
         ],
       ),
-          bottomNavigationBar: MainBottomBar()
-              .box
-              .color(kWhite) // background color
-              .shadowSm          // large shadow
-               // optional: rounded top corners
-              .make()
+
     );
   }
 }

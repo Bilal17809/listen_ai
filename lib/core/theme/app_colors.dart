@@ -45,7 +45,7 @@ const primaryColor = Color(0xFF35BEAE);
 const bgColor = Colors.white;
 const Color borderColor = Colors.grey;
 const skyBorderColor = Color(0xFF569CD4);
-const Color suffixIconColor = Color(0xff8E8E8E);
+const Color suffixIconColor = Color(0xff9aadb1);
 const Color greyBorderColor = Color(0xffADADAD);
 const Color dividerColor = Color(0xffEDEDED);
 
@@ -59,9 +59,9 @@ const kMediumGreen1 = Color.fromARGB(
 ); // #81C784 – soft green
 const kMediumGreen2 = Color.fromARGB(
   255,
-  93,
-  194,
-  96,
+  166,
+  230,
+  167,
 ); // #5DC260 – vibrant green
 const kDarkGreen1 = Color(0xFF388E3C);
 const kDarkGreen2 = Color(
