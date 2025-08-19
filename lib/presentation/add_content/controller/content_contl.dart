@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +11,7 @@ class ContentController extends GetxController {
   var pickedImage = Rx<File?>(null);
   var isLoading = false.obs;
   final ImagePicker _picker = ImagePicker();
+  final FlutterTts flutterTts = FlutterTts();
 
   Future<void> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
@@ -48,5 +50,14 @@ class ContentController extends GetxController {
     scannedText.value = recognisedText.text;
     await textRecognizer.close();
     isLoading.value = false;
+  }
+  Future<void> speakText() async {
+    if (scannedText.value.isNotEmpty) {
+      await flutterTts.speak(scannedText.value);
+    }
+  }
+
+  Future<void> stopSpeaking() async {
+    await flutterTts.stop();
   }
 }

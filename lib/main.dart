@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:listen_ai/presentation/add_content/view/add_content.dart';
 
+import 'core/bindings/bindings.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +19,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Listen AI',
       theme: ThemeData(
-
       ),
+      initialBinding: AppBindings(),
       home:  AddContent(),
     );
   }
