@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listen_ai/presentation/Home/screen/home_screen.dart';
+
+import 'package:listen_ai/presentation/add_content/screen/add_content.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
 
       ),
-      home:  HomeScreen(),
+      home:  AddContent(),
     );
   }
 }

@@ -1,7 +1,7 @@
 class RoutesName {
   // static const String splashPage = 'splash';
   static const String homePage = 'HomeScreen';
-  static const String learnjapan='LearnJapanse';
+  static const String contentpage='AddContent';
   static const String translate='Translator';
   static const String startlearning='StartLearning';
   static const String greeting='Greeting';

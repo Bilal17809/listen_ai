@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:listen_ai/core/router/widget/routing.dart';
 
 import '../../../presentation/Home/screen/home_screen.dart';
+import '../../../presentation/add_content/screen/add_content.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,9 +13,9 @@ class Routes {
       //   return MaterialPageRoute(builder: (_) => Splash());
     case RoutesName.homePage:
         return MaterialPageRoute(builder: (_) => HomeScreen());
-      case RoutesName.learnjapan:
-        return MaterialPageRoute(builder: (_) => LearnJapanse());
-      case RoutesName.translate:
+      case RoutesName.contentpage:
+        return MaterialPageRoute(builder: (_) => AddContent());
+  /* case RoutesName.translate:
         return MaterialPageRoute(builder: (_) => Translator());
       case RoutesName.startlearning:
         return MaterialPageRoute(builder: (_)=>StartLearning());
@@ -38,7 +39,7 @@ class Routes {
 
       case RoutesName.categoryscreen:
         return MaterialPageRoute(builder: (_)=>Category_screen());
-
+*/
       default:
         return MaterialPageRoute(
           builder:
