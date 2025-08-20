@@ -1,59 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:listen_ai/core/theme/app_colors.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-import '../../../core/services/category_services.dart';
+import '/core/services/category_services.dart';
+import '/core/theme/app_styles.dart';
 
 class AddContent extends StatelessWidget {
-
-
- const AddContent({super.key});
+  const AddContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final screenh=MediaQuery.of(context).size.height;
-    final screenw=MediaQuery.of(context).size.width;
+    final screenH = MediaQuery.of(context).size.height;
+    final screenW = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: Column(
-        children: [
-          Spacer(),
-          SizedBox(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                "What do you want to listen today"
-                    .text
-                    .semiBold
-                    .size(18)
-
-                     .make().pOnly(top: 10,left: 10)
-                    , // some padding
-
-                Expanded( // ✅ this gives ListView proper height
-                  child: ListView.builder(
-                    itemCount: titles.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: images[index],
-                        title: Text(
-                          titles[index],
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          subtitles[index],
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                      ).box.rounded.shadowSm.color(kWhite).make().pOnly(top: 5,left: 10,right: 10);
-                    },
-                  ),
-                ),
-              ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // Background Image slider
+            ClipRect(
+              child: ImageSliderWithFlutter(), // keep your widget
             ),
-          ).box.rounded.size(screenw*1, screenh*0.65).color(kWhite).make(),
-        ],
-      ),
 
+            // Positioned bottom content
+            Positioned(
+              top: 250,
+              child: Container(
+                width: screenW,
+                height: screenH * 0.7,
+                decoration: positionDecoration,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, left: 10),
+                      child: Text(
+                        "What do you want to listen today",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: titles.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: listviewDecoration,
+                            child: ListTile(
+                              leading: images[index],
+                              title: Text(
+                                titles[index],
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                subtitles[index],
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.grey),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

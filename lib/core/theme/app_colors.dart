@@ -76,14 +76,14 @@ const kDarkMediumGreen2 = Color(0xFF2E7D32); // #2E7D32
 const kDarkerGreen1 = Color(0xFF1B5E20); // #1B5E20
 const kDarkerGreen2 = Color(0xFF0D3B14); // #0D3B14
 const kDarkTealGreen = Color(0xFF004D40); // #004D40
-const iconcolor=Color(0xFF009688);
-const bgofpressind=Color(0xFFEEEEEE);
-const bgcolor=Color(0xFFEFD8DA);
-Color diconbdcolor=Color(0xFFEEAE4F);
-Color iconbdcolor=Color(0xFFEEAE4F).withOpacity(0.5);
-Color Buttoncolor=Color(0xFF098EEE);
-Color boxbgcolor=Color(0xFFFFDA97);
-Color bgadd=Color(0xffD9D9D9);
+const iconColor=Color(0xFF009688);
+
+Color backgroundColor=Color(0xFFEFD8DA);
+Color iconColors=Color(0xFFEEAE4F);
+Color iconC0lor=Color(0xFFEEAE4F).withAlpha(200);
+Color buttonColor=Color(0xFF098EEE);
+Color boxColor=Color(0xFFFFDA97);
+Color backgroundAdd=Color(0xffD9D9D9);
 const kGradient = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,

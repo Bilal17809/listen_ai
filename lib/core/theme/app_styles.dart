@@ -90,10 +90,7 @@ const TextStyle labelSmallStyle = TextStyle(
 //decoration
 
 //for premium screen
-final BoxDecoration premiumscreenroundecoration = BoxDecoration(
-  borderRadius: BorderRadius.circular(10),
-  color: greyColor.withOpacity(0.14),
-);
+
 
 
 final BoxDecoration roundedDecorationWithShadow = BoxDecoration(
@@ -124,29 +121,7 @@ final BoxDecoration roundedDecoration = BoxDecoration(
     ),
   ],
 );
-final BoxDecoration roundedbgicondecotion=BoxDecoration(
-  color: iconbdcolor,
-  borderRadius: BorderRadius.circular(50),
-  boxShadow: [
-    BoxShadow(
-      color: kWhite01,
-      blurRadius: 6,
-      offset: Offset(0, 2),
-    ),
-  ],
-);
-//for home view
-final BoxDecoration roundedDecorationHomevie = BoxDecoration(
-  gradient: kGradient,
-  borderRadius: BorderRadius.circular(10),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.grey.withValues(alpha: 0.2),
-      blurRadius: 6,
-      offset: Offset(0, 2),
-    ),
-  ],
-);
+
 final BoxDecoration roundedGreenBorderDecoration = BoxDecoration(
   color: greenColor.withValues(alpha: 0.3),
   borderRadius: BorderRadius.circular(10),
@@ -155,17 +130,6 @@ final BoxDecoration roundedGreenBorderDecoration = BoxDecoration(
 
 //home view container decoration
 
-final BoxDecoration rounBorderDecoration = BoxDecoration(
-  color: kWhite,
-  borderRadius: BorderRadius.only(
-    bottomLeft: Radius.circular(30),
-    topRight: Radius.circular(30),
-    bottomRight: Radius.circular(08),
-    topLeft: Radius.circular(08),
-  ),
-  border: Border.all(color: kMintGreen),
-  boxShadow: [BoxShadow(color: greyColor, blurRadius: 2)],
-);
 
 final BoxDecoration rounderGreyBorderDecoration = BoxDecoration(
   color: kWhite,
@@ -179,19 +143,72 @@ final boxShadow = BoxShadow(
   offset: Offset(0, 2),
 );
 
-final BoxDecoration listdecoration=BoxDecoration(
-  color: bgcolor,
+
+final BoxDecoration premiumDecoration=BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.vertical(
+    top: Radius.circular(20),
+  ),
+  boxShadow: [
+    BoxShadow(
+      blurRadius: 6,
+      color: Colors.black26,
+      offset: Offset(0, -2),
+    )
+  ],
+);
+final BoxDecoration proDecoration=BoxDecoration(
+  color: Colors.grey[200],
+  borderRadius: BorderRadius.circular(8),
+);
+final BoxDecoration preferencesDecoration=BoxDecoration(
+  color: kWhite,
   borderRadius: BorderRadius.circular(12),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black.withOpacity(0.05),
+      blurRadius: 5,
+      offset:  Offset(0, 3),
+    ),
+  ],
+);
+final BoxDecoration voiceDecoration=BoxDecoration(
+  color: kMediumGreen2,
+  borderRadius: BorderRadius.circular(6),
+);
+final BoxDecoration linkedDecoration=BoxDecoration(
+  color: kWhite,
+  borderRadius: BorderRadius.circular(12),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black.withOpacity(0.05),
+      blurRadius: 5,
+      offset:  Offset(0, 3),
+    ),
+  ],
+);
+final BoxDecoration listviewDecoration=BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.circular(8),
   boxShadow: [
     BoxShadow(
       color: Colors.black12,
       blurRadius: 4,
       offset: Offset(0, 2),
-    ),
+    )
   ],
 );
-final InputDecoration translatordecotion=InputDecoration(
-  hintText: "Enter text here...",
-  border: InputBorder.none,
-  contentPadding: EdgeInsets.symmetric(horizontal: 20),
+final BoxDecoration positionDecoration=BoxDecoration(
+  color: Colors.white,
+  borderRadius: const BorderRadius.only(
+    topLeft: Radius.circular(16),
+    topRight: Radius.circular(16),
+  ),
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black12,
+      blurRadius: 6,
+      offset: Offset(0, -3),
+    )
+  ],
 );
