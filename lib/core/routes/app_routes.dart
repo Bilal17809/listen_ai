@@ -1,5 +1,7 @@
 abstract class AppRoutes {
-  static const scanTts = '/scan-tts';
+  static const home = '/home';
+  static const typePasteText='/typePastetext';
+  static const listenScreen='/listenScreen';
 
 
 }

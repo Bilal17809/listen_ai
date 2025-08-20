@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:listen_ai/core/theme/app_colors.dart';
-
+import 'package:listen_ai/presentation/home/view/home_page.dart';
 import 'package:velocity_x/velocity_x.dart';
-import '../../presentation/add_content/view/add_content.dart';
 import '../../presentation/mylibeary/screen/mylibrary.dart';
+
 class MainBottomBar extends StatefulWidget {
   const MainBottomBar({super.key});
 
@@ -28,12 +27,12 @@ class _MainBottomBarState extends State<MainBottomBar> {
     } else if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AddContent()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else if (index == 2) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AddContent()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     }
   }
@@ -43,7 +42,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
     return BottomNavigationBar(
       backgroundColor: kWhite,
       selectedItemColor: Colors.black,
-      currentIndex: _currentIndex, // now updates properly
+      currentIndex: _currentIndex,
       onTap: _onItemTapped,
       items: const [
         BottomNavigationBarItem(
@@ -68,29 +67,25 @@ class _MainBottomBarState extends State<MainBottomBar> {
 final List<String> titles = [
   "Document",
   "Scan Text",
-  "Web Link",
   "Type or Paste Text",
   "Mail",
 ];
 
 final List<String> subtitles = [
-  "Upload files form Drive or device",
+  "Upload files form device",
   "Scanned document or images",
-  "Convert URLs to audio",
   "Input or paste text to listen",
   "Listen to e-mails easily",
 ];
 
-// 👇 List of images
+
 final List<Widget> images = [
-  Image.asset("images/2x/google_docs.png")
+  Image.asset("images/google_docs.png")
       .box.size(40, 40).rounded.color(iconbdcolor).make(),
-  Image.asset("images/2x/scanner.png")
+  Image.asset("images/scanner.png")
       .box.size(40, 40).rounded.color(iconbdcolor).make(),
-  Image.asset("images/2x/link.png")
+  Image.asset("images/font.png")
       .box.size(40, 40).rounded.color(iconbdcolor).make(),
-  Image.asset("images/2x/font.png")
-      .box.size(40, 40).rounded.color(iconbdcolor).make(),
-  Image.asset("images/2x/email.png", )
+  Image.asset("images/email.png", )
       .box.size(40, 40).rounded.color(iconbdcolor).make(),
 ];

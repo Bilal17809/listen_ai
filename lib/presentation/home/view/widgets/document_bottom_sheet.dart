@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/constant/constant.dart';
 import '../../../../core/theme/theme.dart';
-import '../../controller/content_contl.dart';
+import '../../controller/home_contl.dart';
+
 
 class DocumentBottomSheet extends StatelessWidget {
   const DocumentBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ContentController());
+    final controller = Get.find<HomeController>();
 
     return Container(
       padding: EdgeInsets.all(mobileWidth(context) * 0.04),
@@ -29,6 +30,7 @@ class DocumentBottomSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
+
 
           // title
           Text("Document", style: titleMediumStyle),
