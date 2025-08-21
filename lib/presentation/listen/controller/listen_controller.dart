@@ -1,64 +1,85 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart';
+import '../../../core/utils/text_utils.dart';
+import '../../../data/services/tts_service.dart';
 
 class ListenController extends GetxController {
-  final audioPlayer = AudioPlayer();
+  final TtsService _ttsService;
+
   RxBool isPlaying = false.obs;
-  RxDouble position = 0.0.obs;
-  RxDouble duration = 0.0.obs;
   RxString currentText = "".obs;
-  RxBool isInitialized = false.obs;
+
+  List<String> _chunks = [];
+  int _currentChunkIndex = 0;
+
+  ListenController(this._ttsService);
 
   @override
   void onInit() {
     super.onInit();
+    _setupAudioListeners();
+  }
 
-    audioPlayer.onPlayerStateChanged.listen((state) {
+  void _setupAudioListeners() {
+    _ttsService.audioPlayer.onPlayerStateChanged.listen((state) {
       isPlaying.value = state == PlayerState.playing;
     });
 
-    audioPlayer.onDurationChanged.listen((d) {
-      duration.value = d?.inSeconds.toDouble() ?? 0;
-      isInitialized.value = true;
+    _ttsService.audioPlayer.onPlayerComplete.listen((event) async {
+      if (_currentChunkIndex < _chunks.length - 1) {
+        _currentChunkIndex++;
+        await _playCurrentChunk();
+      } else {
+        isPlaying.value = false;
+        _currentChunkIndex = 0;
+        await _ttsService.stop();
+      }
     });
-
-    audioPlayer.onPositionChanged.listen((p) {
-      position.value = p.inSeconds.toDouble();
-    });
-  }
-
-  String getTtsUrl(String text,
-      {String langCode = 'en', double speed = 1.0, double pitch = 1.0}) {
-    final encoded = Uri.encodeComponent(text);
-    return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$encoded&tl=$langCode&ttsspeed=$speed&pitch=$pitch';
   }
 
   Future<void> prepareText(String text) async {
     if (text.isEmpty) return;
+
     currentText.value = text;
+    _chunks = TextUtils.splitText(text);
+    _currentChunkIndex = 0;
 
-    final url = getTtsUrl(text);
+    if (_chunks.isNotEmpty) {
+      await _playCurrentChunk();
+    }
+  }
 
-
-    await audioPlayer.setSourceUrl(url);
-
-
-    final d = await audioPlayer.getDuration();
-    duration.value = d?.inSeconds.toDouble() ?? 0;
+  Future<void> _playCurrentChunk() async {
+    if (_currentChunkIndex < _chunks.length) {
+      final url = TextUtils.getTtsUrl(_chunks[_currentChunkIndex]);
+      await _ttsService.playFromUrl(url);
+    }
   }
 
   Future<void> play() async {
-    if (!isInitialized.value) return;
-    await audioPlayer.resume();
+    if (_chunks.isEmpty) return;
+
+    if (!isPlaying.value) {
+      if (_currentChunkIndex >= _chunks.length) {
+        _currentChunkIndex = 0;
+      }
+      await _playCurrentChunk();
+    }
   }
 
-  Future<void> pause() async => await audioPlayer.pause();
+  Future<void> pause() async {
+    await _ttsService.pause();
+  }
 
-  Future<void> stop() async => await audioPlayer.stop();
+  Future<void> stop() async {
+    await _ttsService.stop();
+    _currentChunkIndex = 0;
+    isPlaying.value = false;
+  }
 
   @override
   void onClose() {
-    audioPlayer.dispose();
+    _ttsService.dispose();
     super.onClose();
   }
 }

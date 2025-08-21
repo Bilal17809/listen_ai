@@ -20,10 +20,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
     });
 
     if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Mylibrary()),
-      );
+
     } else if (index == 1) {
       Navigator.push(
         context,

@@ -7,10 +7,25 @@ class TypePasteController extends GetxController {
 
   @override
   void onInit() {
+    clearText();
     super.onInit();
     textController.addListener(() {
       typedText.value = textController.text;
     });
+  }
+
+  // Add this method to clear the text
+  void clearText() {
+    textController.clear();
+    typedText.value = "";
+  }
+
+  @override
+  void onReady() {
+    // This is called after the widget is rendered the first time
+    // Clear the text when the controller is ready (screen is opened)
+    clearText();
+    super.onReady();
   }
 
   void listenText() {
