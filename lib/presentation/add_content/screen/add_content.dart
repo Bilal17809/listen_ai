@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:listen_ai/core/theme/app_colors.dart';
 import '/core/services/category_services.dart';
 import '/core/theme/app_styles.dart';
@@ -12,72 +13,94 @@ class AddContent extends StatelessWidget {
     final screenW = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      // backgroundColor: kWhite,
-      body: Column(
-        children: [
-          ClipRect(
-            child: ImageSliderWithFlutter(), // keep your widget
-          ),
-
-          // Positioned bottom content
-          Positioned(
-            top: 180,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: Container(
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SizedBox(
+              height:300,
+              child: ImageSliderWithFlutter(),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top:300),
               width: screenW,
-              height: screenH * 0.7, // fixed height
+              height: screenH - 180,
               decoration: positionDecoration,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(top: 20, left: 10),
                     child: Text(
                       "What do you want to listen today",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style:context.textTheme.labelLarge
                     ),
                   ),
-                  // ✅ ListView inside Flexible space
-                  // Expanded(
-                  //   child: ListView.builder(
-                  //     itemCount: titles.length,
-                  //     itemBuilder: (context, index) {
-                  //       return Container(
-                  //         margin: const EdgeInsets.symmetric(
-                  //             horizontal: 10, vertical: 5),
-                  //         decoration: listviewDecoration,
-                  //         child: ListTile(
-                  //           leading: images[index],
-                  //           title: Text(
-                  //             titles[index],
-                  //             style: const TextStyle(
-                  //                 fontSize: 16,
-                  //                 fontWeight: FontWeight.bold),
-                  //           ),
-                  //           subtitle: Text(
-                  //             subtitles[index],
-                  //             style: const TextStyle(
-                  //                 fontSize: 14, color: Colors.grey),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
+                  const SizedBox(height: 16),
+
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      itemCount: titles.length,
+                      itemBuilder: (context, index) {
+                        return CardItem(
+                          leading:images[index],
+                          title:titles[index],
+                          subTitle:subtitles[index],);
+                        // return Container(
+                        //   margin: const EdgeInsets.symmetric(
+                        //       horizontal: 5, vertical: 5),
+                        //   decoration: listviewDecoration,
+                        //   child: ListTile(
+                        //     leading: images[index],
+                        //     title: Text(
+                        //       titles[index],
+                        //       style: const TextStyle(
+                        //         fontSize: 16,
+                        //         fontWeight: FontWeight.bold,
+                        //       ),
+                        //     ),
+                        //     subtitle: Text(
+                        //       subtitles[index],
+                        //       style: const TextStyle(
+                        //           fontSize: 14, color: Colors.grey),
+                        //     ),
+                        //   ),
+                        // );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+// cardItem 
+
+class CardItem extends StatelessWidget {
+  final Widget leading;
+  final String title;
+  final String subTitle;
+  const CardItem({super.key,required this.leading,required this.title,required this.subTitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+      decoration:listviewDecoration,
+      child:ListTile(
+      leading: leading,
+      title:Text(title),
+      subtitle: Text(subTitle),
+      ),
+    );
+  }
+}
+
 
 // Example data
 final List<String> titles = [
