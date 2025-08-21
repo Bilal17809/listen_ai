@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // Whites
 const Color kWhite = Color(0xFFFFFFFF);
-const Color kWhiteF7 = Color(0xFFF7F7F7);
+ Color kWhiteF7 = Color(0xFFF7F7F7).withAlpha(600);
 const Color kWhiteFA = Color(0xFFFAFAFA);
 const Color kWhiteEF = Color(0xFFEFEFEF);
 const Color kWhite01 = Color(0x1AFFFFFF);
@@ -80,7 +80,7 @@ const iconColor=Color(0xFF009688);
 
 Color backgroundColor=Color(0xFFEFD8DA);
 Color iconColors=Color(0xFFEEAE4F);
-Color iconC0lor=Color(0xFFEEAE4F).withAlpha(200);
+Color iconC0lor=Color(0xFFEEAE4F).withAlpha(900);
 Color buttonColor=Color(0xFF098EEE);
 Color boxColor=Color(0xFFFFDA97);
 Color backgroundAdd=Color(0xffD9D9D9);

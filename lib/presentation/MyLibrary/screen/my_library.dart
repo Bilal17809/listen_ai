@@ -12,7 +12,7 @@ class MyLibrary extends StatelessWidget {
       backgroundColor: kWhite,
       appBar: AppBar(
         backgroundColor: kWhite,
-        leading:  Padding(
+        title:  Padding(
           padding: EdgeInsets.only(left: 10),
           child: Align(
             alignment: Alignment.centerLeft,
@@ -25,7 +25,7 @@ class MyLibrary extends StatelessWidget {
             ),
           ),
         ),
-        title: GestureDetector(
+        actions: [GestureDetector(
           onTap: () {
             // handle logo tap
           },
@@ -40,6 +40,7 @@ class MyLibrary extends StatelessWidget {
             ),
           ),
         ),
+    ]
       ),
       body: Column(
         children: [

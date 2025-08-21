@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:listen_ai/core/extension/extension.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import '../theme/app_styles.dart';
 import '/presentation/MyLibrary/screen/my_library.dart';
 import '/presentation/add_content/screen/add_content.dart';
 
@@ -127,11 +129,11 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
       "title": "Download and listen anytime,\nanywhere",
     },
     {
-      "img": "images/Frame.png",
+      "img": "images/Group 1.png",
       "title": "Scan and listen any book or\ndocument effortlessly",
     },
     {
-      "img": "images/Frame.png",
+      "img": "images/Group 2.png",
       "title": "Boost productivity with adjustable\nplayback speed",
     },
   ];
@@ -141,14 +143,13 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
 
   @override
   Widget build(BuildContext context) {
-    final screenW = MediaQuery.of(context).size.width;
-    final screenH = MediaQuery.of(context).size.height;
+
 
     return CarouselSlider.builder(
       carouselController: _controller,
       itemCount: sliderData.length,
       options: CarouselOptions(
-        height: screenH * 0.4,
+        height: context.screenHeight * 0.5,
         autoPlay: true,
         viewportFraction: 1.0,
         onPageChanged: (index, reason) {
@@ -163,16 +164,16 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
             ClipRRect(
               child: Image.asset(
                 item["img"]!,
-                height: screenH * 0.4,
-                width: screenW,
-                fit: BoxFit.cover,
+                height: context.screenHeight * 0.4,
+                width: context.screenWidth,
+
               ),
             ),
 
             // Title text
             Positioned(
-              left: 20,
-              bottom: 60,
+              left: 10,
+              bottom: 15,
               child: Text(
                 item["title"]!,
                 style: const TextStyle(
@@ -184,8 +185,8 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
 
             // Try Button
             Positioned(
-              right: 20,
-              bottom: 70,
+              right: 10,
+              bottom: 25,
               child: GestureDetector(
                 onTap: () {
                   Get.to(
@@ -196,14 +197,14 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  width: screenW * 0.25,
-                  height: screenH * 0.05,
+                  width: context.screenWidth * 0.25,
+                  height: context.screenHeight * 0.03,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Text(
-                    "Try for free",
+                    "Try for fre...",
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
@@ -212,8 +213,8 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
 
             // Page Indicator
             Positioned(
-              bottom: 100,
-              left: 23,
+              bottom: 60,
+              left: 13,
               child: AnimatedSmoothIndicator(
                 activeIndex: activeIndex,
                 count: sliderData.length,
@@ -240,21 +241,23 @@ class _ImageSliderWithFlutterState extends State<ImageSliderWithFlutter> {
 }
 
 Widget buildHeaderImage(BuildContext context) {
-  final screenH = MediaQuery.of(context).size.height;
-  final screenW = MediaQuery.of(context).size.width;
+
 
   return Stack(
     children: [
-      Image.asset(
-        "images/3x/Group.png",
-        height: screenH * 0.45,
-        width: screenW,
-        fit: BoxFit.cover,
+      Padding(
+        padding:  EdgeInsets.only(top: 40.0),
+        child: Image.asset(
+          "images/3x/Group.png",
+          height: context.screenHeight * 0.35,
+          width: context.screenWidth,
+
+        ),
       ),
 
       // Close Button
       Positioned(
-        top: 30,
+        top: 12,
         left: 15,
         child: IconButton(
           icon: Icon(Icons.clear, color: Colors.grey[400], size: 25),
@@ -265,11 +268,11 @@ Widget buildHeaderImage(BuildContext context) {
       // Restore Button
       Positioned(
         top: 25,
-        right: 15,
+        right: 25,
         child: Container(
           alignment: Alignment.center,
-          width: screenW * 0.17,
-          height: screenH * 0.04,
+          width: context.screenWidth * 0.17,
+          height: context.screenHeight * 0.04,
           decoration: BoxDecoration(
             color: Colors.grey[200],
             borderRadius: BorderRadius.circular(6),
@@ -281,31 +284,234 @@ Widget buildHeaderImage(BuildContext context) {
   );
 }
 
-Widget rowItem(IconData icon, String title) {
-  return Row(
-    children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Icon(icon),
-      ),
-      Text(title, style: const TextStyle(fontSize: 18)),
-    ],
-  );
-}
 final List<String> titles = [
-  "First Item",
-  "Second Item",
-  "Third Item",
+  "Document",
+  "Scan Text",
+  "Web Link",
+  "Type or Paste Text",
+ "Mail"
 ];
 
 final List<String> subtitles = [
-  "This is the first subtitle",
-  "This is the second subtitle",
-  "This is the third subtitle",
+  "Upload files form Drive or device",
+  "Scanned document or images",
+  "Convert URLs to audio",
+  "Input or Paste text to listen",
+  "Listen to e-mail easily"
 ];
 
 final List<Widget> images = [
-  Icon(Icons.home, color: Colors.blue),
-  Icon(Icons.star, color: Colors.orange),
-  Icon(Icons.settings, color: Colors.green),
+  Image.asset(
+    "images/2x/google_docs.png", // replace with your image
+
+  ),
+  Image.asset(
+    "images/2x/scanner.png", // replace with your image
+
+  ),
+  Image.asset(
+    "images/2x/link.png", // replace with your image
+
+  ),
+  Image.asset(
+    "images/2x/font.png", // replace with your image
+
+  ),
+  Image.asset(
+    "images/2x/email.png", // replace with your image
+
+  ),
 ];
+class CardItem extends StatelessWidget {
+  final Widget leading;
+  final String title;
+  final String subTitle;
+  const CardItem({super.key,required this.leading,required this.title,required this.subTitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+      decoration:listviewDecoration,
+      child:ListTile(
+        leading: leading,
+        title:Text(title),
+        subtitle: Text(subTitle),
+      ),
+    );
+  }
+}
+// since you used context.screenWidth
+
+class SupportDialog extends StatelessWidget {
+  const SupportDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: context.screenWidth * 0.9,
+        height: context.screenHeight * 0.341,
+        padding: const EdgeInsets.symmetric(vertical: 19),
+        decoration: supportDecoration, // make sure you defined this
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Icon(Icons.star_border_outlined),
+                ),
+                Text(
+                  "Like us, Rate us",
+                  style: context.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                ),
+                const SizedBox(width: 5),
+                const Icon(Icons.favorite, color: Colors.grey, size: 20),
+              ],
+            ),
+            const Divider(),
+            rowItem(Icons.contact_support_outlined, "FAQ & Support"),
+            const Divider(),
+            rowItem(Icons.privacy_tip_outlined, "Privacy Policy"),
+            const Divider(),
+            rowItem(Icons.sticky_note_2_outlined, "Terms of Service"),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// reusable row builder
+  Widget rowItem(IconData icon, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.grey[700]),
+          const SizedBox(width: 10),
+          Text(
+            text,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
+    );
+  }
+}
+ // since you are using context extensions
+
+class PreferencesCard extends StatelessWidget {
+  const PreferencesCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: context.screenWidth * 0.9,
+        height: context.screenHeight * 0.27,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: preferencesDecoration, // your custom BoxDecoration
+        child: Column(
+          children: [
+            // Voice Cloning Row
+            Row(
+              children: [
+                const Icon(Icons.mic),
+                const SizedBox(width: 8),
+                Text(
+                  "Voice Cloning",
+                  style:
+                  context.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: context.screenWidth * 0.085,
+                  height: context.screenHeight * 0.027,
+                  alignment: Alignment.center,
+                  decoration: voiceDecoration,
+                  child: Text(
+                    "New",
+                    style: context.textTheme.bodyLarge?.copyWith(
+                      color: kDarkerGreen1,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Icon(Icons.keyboard_arrow_right),
+                ),
+              ],
+            ),
+            const Divider(),
+
+            // Change Voice Row
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Icon(Icons.surround_sound_rounded),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  "Change voice",
+                  style:
+                  context.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                ),
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Text("Sam"),
+                ),
+              ],
+            ),
+            const Divider(),
+
+            // App Language Row
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Icon(Icons.language_outlined),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  "App Language",
+                  style:
+                  context.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                ),
+                const Spacer(),
+                const Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Text("English (US)"),
+                ),
+              ],
+            ),
+            const Divider(),
+
+            // Request Feature Row
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Icon(Icons.note_alt_outlined),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  "Request Feature",
+                  style:
+                  context.textTheme.bodyLarge?.copyWith(fontSize: 18),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

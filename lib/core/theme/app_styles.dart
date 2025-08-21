@@ -149,28 +149,16 @@ final BoxDecoration premiumDecoration=BoxDecoration(
   borderRadius: BorderRadius.vertical(
     top: Radius.circular(20),
   ),
-  boxShadow: [
-    BoxShadow(
-      blurRadius: 6,
-      color: Colors.black26,
-      offset: Offset(0, -2),
-    )
-  ],
+
 );
 final BoxDecoration proDecoration=BoxDecoration(
   color: Colors.grey[200],
   borderRadius: BorderRadius.circular(8),
 );
 final BoxDecoration preferencesDecoration=BoxDecoration(
-  color: kWhite,
+  color: kWhiteF7,
   borderRadius: BorderRadius.circular(12),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black..withAlpha(200),
-      blurRadius: 5,
-      offset:  Offset(0, 3),
-    ),
-  ],
+
 );
 final BoxDecoration voiceDecoration=BoxDecoration(
   color: kMediumGreen2,
@@ -190,13 +178,8 @@ final BoxDecoration linkedDecoration=BoxDecoration(
 final BoxDecoration listviewDecoration=BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.circular(8),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black12,
-      blurRadius: 4,
-      offset: Offset(0, 2),
-    )
-  ],
+
+
 );
 final BoxDecoration positionDecoration=BoxDecoration(
   color: kWhite,
@@ -204,11 +187,21 @@ final BoxDecoration positionDecoration=BoxDecoration(
     topLeft: Radius.circular(16),
     topRight: Radius.circular(16),
   ),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black12,
-      blurRadius: 6,
-      offset: Offset(0, -3),
-    )
-  ],
+
+);
+final BoxDecoration cardItemDecoration=BoxDecoration(
+  color: iconC0lor,
+  borderRadius: BorderRadius.circular(7),
+
+);
+final BoxDecoration shareDecoration=BoxDecoration(
+  color: kWhite,
+  borderRadius: BorderRadius.circular(12),
+
+);
+final BoxDecoration supportDecoration=BoxDecoration(
+  color: kWhiteF7,
+  borderRadius: BorderRadius.circular(12),
+
+
 );
