@@ -181,7 +181,7 @@ class Setting extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black..withAlpha(200),
                         blurRadius: 5,
                         offset:  Offset(0, 3),
                       ),
@@ -213,7 +213,7 @@ class Setting extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black..withAlpha(200),
                         blurRadius: 5,
                         offset:  Offset(0, 3),
                       ),

@@ -62,7 +62,7 @@ class MyLibrary extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: Colors.grey..withAlpha(200),
                         blurRadius: 5,
                         offset:  Offset(0, 3),
                       ),

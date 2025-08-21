@@ -166,7 +166,7 @@ final BoxDecoration preferencesDecoration=BoxDecoration(
   borderRadius: BorderRadius.circular(12),
   boxShadow: [
     BoxShadow(
-      color: Colors.black.withOpacity(0.05),
+      color: Colors.black..withAlpha(200),
       blurRadius: 5,
       offset:  Offset(0, 3),
     ),
@@ -181,7 +181,7 @@ final BoxDecoration linkedDecoration=BoxDecoration(
   borderRadius: BorderRadius.circular(12),
   boxShadow: [
     BoxShadow(
-      color: Colors.black.withOpacity(0.05),
+      color: Colors.black.withAlpha(200),
       blurRadius: 5,
       offset:  Offset(0, 3),
     ),
@@ -199,7 +199,7 @@ final BoxDecoration listviewDecoration=BoxDecoration(
   ],
 );
 final BoxDecoration positionDecoration=BoxDecoration(
-  color: Colors.white,
+  color: kWhite,
   borderRadius: const BorderRadius.only(
     topLeft: Radius.circular(16),
     topRight: Radius.circular(16),
