@@ -33,7 +33,7 @@ class TypePasteScreen extends StatelessWidget {
                 Get.to(() => ListenScreen(text: textToSend));
               },
             ),
-            SizedBox(height: mobileHeight(context) * 0.015),
+            SizedBox(height: mobileHeight(context) * 0.25),
           ],
         ),
       ),

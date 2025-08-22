@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:listen_ai/presentation/my_library/view/widgets/library_item_tile.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_styles.dart';
 import '../../../data/models/library_item.dart';
@@ -12,8 +13,7 @@ class MyLibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyLibraryController controller = Get.find();
-    controller.loadLibraryIfNeeded();
+    final controller = Get.find<MyLibraryController>();
 
     return Scaffold(
       backgroundColor: kWhite,
@@ -30,9 +30,7 @@ class MyLibraryScreen extends StatelessWidget {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: Get.back,
         ),
       ),
       body: Obx(() {
@@ -44,71 +42,24 @@ class MyLibraryScreen extends StatelessWidget {
               style: bodyMediumStyle,
             ),
           );
-        } else {
-          return ListView.builder(
-            padding: const EdgeInsets.all(16.0),
-            itemCount: controller.libraryItems.length,
-            itemBuilder: (context, index) {
-              final LibraryItem item = controller.libraryItems[index];
-              return _buildLibraryItemTile(controller, item, context);
-            },
-          );
         }
+
+        return ListView.builder(
+          padding: const EdgeInsets.all(16.0),
+          itemCount: controller.libraryItems.length,
+          itemBuilder: (context, index) {
+            final LibraryItem item = controller.libraryItems[index];
+            return LibraryItemTile(
+              controller: controller,
+              item: item,
+              onTap: () => Get.to(() => ListenScreen(text: item.fullText)),
+            );
+          },
+        );
       }),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(color: kWhite, boxShadow: [boxShadow]),
         child: MainBottomBar(),
-      ),
-    );
-  }
-
-  Widget _buildLibraryItemTile(
-      MyLibraryController controller, LibraryItem item, BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12.0),
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        title: Text(
-          item.title,
-          style: titleSmallStyle.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitle: Text(
-          "Saved: ${item.savedAt.toLocal().toString().split('.').first}",
-          style: bodySmallStyle.copyWith(
-            color: textGreyColor,
-          ),
-        ),
-        trailing: IconButton(
-          icon: const Icon(Icons.delete, color: kRed),
-          onPressed: () {
-            Get.defaultDialog(
-              title: "Delete Item",
-              middleText: "Are you sure you want to delete '${item.title}'?",
-              textConfirm: "Delete",
-              textCancel: "Cancel",
-              confirmTextColor: kWhite,
-              buttonColor: kRed,
-              onConfirm: () {
-                controller.removeItem(item.id);
-                Get.back();
-              },
-              onCancel: () {
-                Get.back();
-              },
-            );
-          },
-        ),
-        onTap: () {
-          Get.to(() => ListenScreen(text: item.fullText));
-        },
       ),
     );
   }

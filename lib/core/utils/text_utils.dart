@@ -23,8 +23,4 @@ class TextUtils {
     return chunks;
   }
 
-  static String getTtsUrl(String text, {String langCode = 'en'}) {
-    final encoded = Uri.encodeComponent(text);
-    return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$encoded&tl=$langCode';
-  }
 }

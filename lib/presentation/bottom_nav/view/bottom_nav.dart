@@ -27,6 +27,9 @@ class MainBottomBar extends StatelessWidget {
           } else if (index == 1) {
             Get.toNamed(AppRoutes.home);
           }
+          else if (index == 2) {
+            Get.toNamed(AppRoutes.settings);
+          }
 
         },
         items: const [

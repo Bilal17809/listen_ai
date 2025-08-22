@@ -18,9 +18,6 @@ class ListenScreen extends StatelessWidget {
 
     Future.microtask(() async {
       await controller.prepareText(text);
-      Future.delayed(const Duration(microseconds: 800), () {
-        controller.play();
-      });
     });
 
     return PopScope(

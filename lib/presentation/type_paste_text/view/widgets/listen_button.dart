@@ -27,8 +27,7 @@ class ListenButton extends StatelessWidget {
             backgroundColor: kYellow,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
-            ),
-            elevation: 6,
+            )
           ),
           child: Text(
             "Listen",
