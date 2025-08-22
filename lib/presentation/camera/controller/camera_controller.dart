@@ -18,8 +18,12 @@ class CameraController extends GetxController {
   final RxString scannedText = "".obs;
   final RxBool isLoading = false.obs;
 
+
+
   Future<void> captureImage() async {
     try {
+      scannedText.value = "";
+      pickedImage.value = null;
       isLoading.value = true;
       final File? imageFile = await _imageService.pickImageFromCamera();
 
@@ -28,11 +32,7 @@ class CameraController extends GetxController {
         await extractTextFromImage(imageFile);
       }
     } catch (e) {
-      Get.snackbar(
-        "Camera Error",
-        "Failed to capture image: ${e.toString()}",
-        snackPosition: SnackPosition.BOTTOM,
-      );
+
       isLoading.value = false;
     }
   }
@@ -42,13 +42,6 @@ class CameraController extends GetxController {
     try {
       final String extractedText = await _textService.extractTextFromImage(imageFile);
       scannedText.value = extractedText;
-    } catch (e) {
-      // Improved error handling
-      Get.snackbar(
-        "Text Extraction Error",
-        "Failed to extract text: ${e.toString()}",
-        snackPosition: SnackPosition.BOTTOM,
-      );
     } finally {
       isLoading.value = false;
     }

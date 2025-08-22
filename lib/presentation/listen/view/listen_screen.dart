@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:listen_ai/core/routes/app_routes.dart';
-
-import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_styles.dart';
+import '../../../core/theme/theme.dart';
+import '../../../data/models/library_item.dart';
+import '../../my_library/controller/my_library_contrl.dart';
 import '../controller/listen_controller.dart';
-import 'widgets/bottom_audio_controls.dart';
+import 'listen.dart';
 
 class ListenScreen extends StatelessWidget {
   final String text;
@@ -14,6 +14,7 @@ class ListenScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ListenController controller = Get.find();
+    final MyLibraryController libraryController = Get.find();
 
     Future.microtask(() async {
       await controller.prepareText(text);
@@ -50,6 +51,15 @@ class ListenScreen extends StatelessWidget {
               Get.offNamed(AppRoutes.home);
             },
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.add, color: Colors.black87),
+              onPressed: () {
+                final LibraryItem? savedItem = libraryController.addItem(text);
+
+              },
+            ),
+          ],
         ),
 
         body: Column(

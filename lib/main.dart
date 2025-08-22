@@ -5,6 +5,7 @@ import 'package:listen_ai/core/routes/app_routes.dart';
 import 'core/bindings/bindings.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

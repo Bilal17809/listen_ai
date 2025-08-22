@@ -95,7 +95,6 @@ final BoxDecoration premiumscreenroundecoration = BoxDecoration(
   color: greyColor.withOpacity(0.14),
 );
 
-
 final BoxDecoration roundedDecorationWithShadow = BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.circular(10),
@@ -124,16 +123,10 @@ final BoxDecoration roundedDecoration = BoxDecoration(
     ),
   ],
 );
-final BoxDecoration roundedbgicondecotion=BoxDecoration(
+final BoxDecoration roundedbgicondecotion = BoxDecoration(
   color: iconbdcolor,
   borderRadius: BorderRadius.circular(50),
-  boxShadow: [
-    BoxShadow(
-      color: kWhite01,
-      blurRadius: 6,
-      offset: Offset(0, 2),
-    ),
-  ],
+  boxShadow: [BoxShadow(color: kWhite01, blurRadius: 6, offset: Offset(0, 2))],
 );
 //for home view
 final BoxDecoration roundedDecorationHomevie = BoxDecoration(
@@ -179,19 +172,25 @@ final boxShadow = BoxShadow(
   offset: Offset(0, 2),
 );
 
-final BoxDecoration listdecoration=BoxDecoration(
+final BoxDecoration listdecoration = BoxDecoration(
   color: bgcolor,
   borderRadius: BorderRadius.circular(12),
   boxShadow: [
-    BoxShadow(
-      color: Colors.black12,
-      blurRadius: 4,
-      offset: Offset(0, 2),
-    ),
+    BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
   ],
 );
-final InputDecoration translatordecotion=InputDecoration(
+final InputDecoration translatordecotion = InputDecoration(
   hintText: "Enter text here...",
   border: InputBorder.none,
   contentPadding: EdgeInsets.symmetric(horizontal: 20),
+);
+
+final BoxDecoration greyDragHandleDecoration = BoxDecoration(
+  color: greyColor.withAlpha(100),
+  borderRadius: BorderRadius.circular(10),
+);
+
+final BoxDecoration roundedIconDecoration = BoxDecoration(
+  color: iconbdcolor,
+  borderRadius: BorderRadius.circular(8),
 );

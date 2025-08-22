@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:listen_ai/presentation/type_paste_text/view/widgets/listen_button.dart';
-import 'package:listen_ai/presentation/type_paste_text/view/widgets/text_field_container.dart';
-import 'package:listen_ai/presentation/type_paste_text/view/widgets/type_paste_app_bar.dart';
+import 'package:listen_ai/presentation/type_paste_text/view/type_paste.dart';
 import '../controller/type_paste_controller.dart';
 import '../../listen/view/listen_screen.dart';
 import '../../../../core/theme/app_colors.dart';

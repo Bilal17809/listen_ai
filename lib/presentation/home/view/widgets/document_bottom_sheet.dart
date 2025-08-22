@@ -10,7 +10,6 @@ class DocumentBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Find the DocumentController instead of HomeController
     final DocumentController controller = Get.find<DocumentController>();
 
     return Container(
@@ -26,15 +25,11 @@ class DocumentBottomSheet extends StatelessWidget {
             width: mobileWidth(context) * 0.1,
             height: mobileHeight(context) * 0.006,
             margin: EdgeInsets.only(bottom: mobileHeight(context) * 0.015),
-            decoration: BoxDecoration(
-              color: greyColor.withAlpha(100),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            decoration: greyDragHandleDecoration,
           ),
           Text("Document", style: titleMediumStyle),
           SizedBox(height: mobileHeight(context) * 0.025),
           GestureDetector(
-            // Use controller.pickFile from DocumentController
             onTap: controller.pickFile,
             child: Container(
               margin: EdgeInsets.symmetric(
@@ -47,33 +42,31 @@ class DocumentBottomSheet extends StatelessWidget {
                   width: mobileWidth(context) * 0.1,
                   height: mobileWidth(context) * 0.1,
                   decoration: BoxDecoration(
-                    color: iconbdcolor, // Ensure iconbdcolor is defined in app_colors.dart
+                    color: iconbdcolor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Image.asset(
-                    "images/google_docs.png", // Ensure this asset exists
+                    "images/google_docs.png",
                     fit: BoxFit.contain,
                   ),
                 ),
                 title: Text("Upload from device", style: titleSmallStyle),
                 subtitle: const Text(
                   "PDF, ePub, DOCX, TXT & more",
-                  style: bodyMediumStyle, // Ensure bodyMediumStyle is accessible
+                  style: bodyMediumStyle,
                 ),
               ),
             ),
           ),
           SizedBox(height: mobileHeight(context) * 0.012),
-          // Obx to show selected file or extraction status
           Obx(() {
             if (controller.selectedFilePath.isEmpty) {
               return const SizedBox.shrink();
             }
-            // Show selected file name
             final fileName = controller.selectedFilePath.value.split('/').last;
             return Text(
               "Selected: $fileName",
-              style: bodyMediumStyle, // Ensure bodyMediumStyle is accessible
+              style: bodyMediumStyle,
               overflow: TextOverflow.ellipsis,
             );
           }),
@@ -81,7 +74,7 @@ class DocumentBottomSheet extends StatelessWidget {
             if (controller.isExtracting.value) {
               return const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("Extracting...", style: bodySmallStyle), // Ensure bodySmallStyle is accessible
+                child: Text("Extracting...", style: bodySmallStyle),
               );
             }
             return const SizedBox.shrink();
