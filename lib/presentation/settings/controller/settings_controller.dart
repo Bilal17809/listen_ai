@@ -3,9 +3,9 @@ import '../../../core/local_storage/local_storage_service.dart';
 
 class SettingsController extends GetxController {
   static const String _voiceSettingKey = 'selected_voice';
-  static const String defaultVoice = 'male'; // agar kuch save na ho
+  static const String defaultVoice = 'male';
 
-  // ✅ observable variable jo UI ko update karega
+
   final RxString _selectedVoice = defaultVoice.obs;
 
   String get selectedVoice => _selectedVoice.value;
@@ -13,21 +13,21 @@ class SettingsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadVoiceSetting(); // App open hote hi storage check karega
+    _loadVoiceSetting();
   }
 
   Future<void> _loadVoiceSetting() async {
     try {
       final String? savedVoice = await LocalStorageService.getString(_voiceSettingKey);
       if (savedVoice != null) {
-        _selectedVoice.value = savedVoice; // ✅ saved value set kar do
+        _selectedVoice.value = savedVoice;
       } else {
-        _selectedVoice.value = defaultVoice; // ✅ fallback agar kuch na ho
+        _selectedVoice.value = defaultVoice;
       }
       print("🎤 Loaded voice from storage: ${_selectedVoice.value}");
     } catch (e) {
       print("❌ Error loading voice setting: $e");
-      _selectedVoice.value = defaultVoice; // error me bhi default rakho
+      _selectedVoice.value = defaultVoice;
     }
   }
 

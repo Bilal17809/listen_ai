@@ -76,9 +76,9 @@ class ListenController extends GetxController {
     if (_currentChunkIndex < _chunks.length) {
       final url = TtsService.getTtsUrl(_chunks[_currentChunkIndex]);
 
-      // ✅ Get voice from SharedPreferences instead of controller
+
       final savedVoice = await LocalStorageService.getString('selected_voice');
-      final voice = savedVoice ?? 'male'; // default 'male' agar null ho
+      final voice = savedVoice ?? 'male';
 
       await _ttsService.playFromUrl(url, voice: voice);
 
