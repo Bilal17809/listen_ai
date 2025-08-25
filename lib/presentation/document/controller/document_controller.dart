@@ -57,7 +57,6 @@ class DocumentController extends GetxController {
           child: Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Column(
@@ -82,13 +81,10 @@ class DocumentController extends GetxController {
       if (_extractedText.value != null && _extractedText.value!.isNotEmpty) {
         Get.to(() => ListenScreen(text: _extractedText.value!));
 
-      } else {
-        Get.snackbar("No Text", "No text could be extracted from the document.", snackPosition: SnackPosition.BOTTOM);
       }
 
     } catch (e) {
-      if (Get.isDialogOpen ?? false) Get.back();
-      Get.snackbar("Extraction Failed", "Could not extract text: $e", snackPosition: SnackPosition.BOTTOM);
+
     } finally {
       isExtracting.value = false;
     }

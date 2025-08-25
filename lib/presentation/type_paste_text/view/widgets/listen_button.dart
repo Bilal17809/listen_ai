@@ -24,15 +24,17 @@ class ListenButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: controller.typedText.value.isEmpty ? null : onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: kYellow,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25),
-            )
+            ),
+            elevation: 2,
           ),
           child: Text(
             "Listen",
             style: bodyLargeStyle.copyWith(
-              color: kWhite,
+              color: Theme.of(context).elevatedButtonTheme.style?.foregroundColor?.resolve({}) ?? kWhite,
               fontWeight: FontWeight.bold,
               fontSize: mobileHeight(context) * 0.022,
               letterSpacing: 0.5,

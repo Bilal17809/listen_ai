@@ -24,6 +24,8 @@ class AppBindings extends Bindings {
       () => TextRecognitionService(),
       fenix: true,
     );
+
+
     Get.lazyPut<TtsService>(() => TtsService(), fenix: true);
     Get.lazyPut<BottomBarController>(() => BottomBarController(),fenix: true);
     Get.lazyPut<MyLibraryService>(() => MyLibraryService(Get.find()), fenix: true);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listen_ai/core/theme/app_styles.dart';
+import '../../../../core/theme/app_styles.dart';
 
 class FeatureImage extends StatelessWidget {
   final String imagePath;
@@ -12,8 +12,16 @@ class FeatureImage extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration:roundedIconDecoration ,
-      child: Image.asset(imagePath),
+      decoration: featureImageDecoration(context),
+      child: Image.asset(
+        imagePath,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.white
+            : null,
+        colorBlendMode: Theme.of(context).brightness == Brightness.dark
+            ? BlendMode.modulate
+            : null,
+      ),
     );
   }
 }

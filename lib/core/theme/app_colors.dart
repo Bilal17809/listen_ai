@@ -92,3 +92,10 @@ const kGradient = LinearGradient(
   ],
 );
 /////////////////////////////////////// listen ai////////////////////////////
+const kGreyDark = Color(0xFF616161); // Grey[700]
+const kGreyLight = Color(0xFFE0E0E0); // Grey[300]
+const Color shadowColor = Colors.black54;
+const Color shadowgreyColor = Colors.grey;
+
+
+

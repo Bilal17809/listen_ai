@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:listen_ai/core/routes/app_routes.dart';
-import 'package:listen_ai/core/theme/app_colors.dart';
-import 'package:listen_ai/presentation/home/view/home_page.dart';
-import 'package:listen_ai/presentation/my_library/view/my_library_screen.dart';
-
 import '../controller/bottom_nav.dart';
 
 class MainBottomBar extends StatelessWidget {
@@ -16,8 +12,9 @@ class MainBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return BottomNavigationBar(
-        backgroundColor: kWhite,
-        selectedItemColor: Colors.black,
+        backgroundColor: Theme.of(context).bottomSheetTheme.backgroundColor,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).textTheme.bodyMedium?.color,
         currentIndex: controller.currentIndex.value,
         onTap: (index) {
           controller.onItemTapped(index);
@@ -26,11 +23,9 @@ class MainBottomBar extends StatelessWidget {
             Get.toNamed(AppRoutes.myLibrary);
           } else if (index == 1) {
             Get.toNamed(AppRoutes.home);
-          }
-          else if (index == 2) {
+          } else if (index == 2) {
             Get.toNamed(AppRoutes.settings);
           }
-
         },
         items: const [
           BottomNavigationBarItem(

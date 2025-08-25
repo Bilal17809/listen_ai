@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/constant/constant.dart';
+import '../../../../../core/theme/app_styles.dart';
 import '../../controller/listen_controller.dart';
 
 class BottomAudioControls extends StatelessWidget {
@@ -11,64 +12,64 @@ class BottomAudioControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 60),
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).padding.bottom + mobileHeight(context) * 0.02,
+      ),
       child: Obx(() {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: kWhite,
-            border: Border(
-              top: BorderSide(color: greyBorderColor, width: 1),
-            ),
+          padding: EdgeInsets.symmetric(
+            horizontal: mobileWidth(context) * 0.04,
+            vertical: mobileHeight(context) * 0.015,
           ),
+          decoration: bottomControlsDecoration(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 4,
+                height: mobileHeight(context) * 0.005,
                 child: LinearProgressIndicator(
                   value: 1,
-                  backgroundColor: greyBorderColor,
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
+                  backgroundColor: linearProgressBackground(context),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: mobileHeight(context) * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.stop, size: 30),
-                    onPressed: () async {
-                      await controller.stop();
-                    },
+                    icon: Icon(
+                      Icons.stop,
+                      size: mobileWidth(context) * 0.075,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    onPressed: controller.stop,
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: mobileWidth(context) * 0.04),
                   CircleAvatar(
-                    radius: 28,
-                    backgroundColor: Colors.amber,
+                    radius: mobileWidth(context) * 0.082,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     child: IconButton(
                       icon: Icon(
                         controller.isPlaying.value
                             ? Icons.pause
                             : Icons.play_arrow,
-                        size: 32,
-                        color: kWhite,
+                        size: mobileWidth(context) * 0.075,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
-                      onPressed: () {
-                        if (controller.isPlaying.value) {
-                          controller.pause();
-                        } else {
-                          controller.play();
-                        }
-                      },
+                      onPressed: controller.togglePlayPause,
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: mobileWidth(context) * 0.04),
                   IconButton(
-                    icon: const Icon(Icons.skip_next, size: 30),
-                    onPressed: () async {
-                      await controller.stop();
-                    },
+                    icon: Icon(
+                      Icons.skip_next,
+                      size: mobileWidth(context) * 0.075,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
+                    onPressed: controller.stop,
                   ),
                 ],
               ),

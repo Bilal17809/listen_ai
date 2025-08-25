@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:listen_ai/core/routes/app_pages.dart';
-import 'package:listen_ai/core/routes/app_routes.dart';
+import 'package:get/get.dart';
+import 'core/routes/app_pages.dart';
+import 'core/routes/app_routes.dart';
 import 'core/bindings/bindings.dart';
+import 'core/theme/app_theme.dart';
+import 'core/local_storage/local_storage_service.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  final bool isDarkTheme = await LocalStorageService.isDarkTheme();
+
+  runApp(MyApp(isDarkTheme: isDarkTheme));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isDarkTheme;
+
+  const MyApp({super.key, required this.isDarkTheme});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       initialBinding: AppBindings(),
       initialRoute: AppRoutes.home,
       getPages: appPages,

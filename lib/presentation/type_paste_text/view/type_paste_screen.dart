@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:listen_ai/presentation/type_paste_text/view/type_paste.dart';
 import '../controller/type_paste_controller.dart';
 import '../../listen/view/listen_screen.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/constant/constant.dart';
+import 'widgets/text_field_container.dart';
+import 'widgets/listen_button.dart';
+import 'widgets/type_paste_app_bar.dart';
 
 class TypePasteScreen extends StatelessWidget {
   const TypePasteScreen({super.key});
@@ -14,7 +15,7 @@ class TypePasteScreen extends StatelessWidget {
     final TypePasteController controller = Get.find<TypePasteController>();
 
     return Scaffold(
-      backgroundColor: kWhiteF7,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const TypePasteAppBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -33,7 +34,7 @@ class TypePasteScreen extends StatelessWidget {
                 Get.to(() => ListenScreen(text: textToSend));
               },
             ),
-            SizedBox(height: mobileHeight(context) * 0.25),
+            SizedBox(height: mobileHeight(context) * 0.02),
           ],
         ),
       ),

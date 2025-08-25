@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import '../constant/constant.dart';
 import 'app_colors.dart';
 
-/*
-Use all these for text style
-you don't need to style the text
-in Ui just call these widget in text style
-*/
+
+const double appBarElevation = 1.0;
+const EdgeInsets pagePadding = EdgeInsets.all(16);
+const double textLineHeight = 1.5;
 
 const TextStyle headlineMediumStyle = TextStyle(
   fontFamily: fontFamily,
@@ -114,7 +113,7 @@ allow you all component
 */
 final BoxDecoration roundedDecoration = BoxDecoration(
   color: Colors.white,
-  borderRadius: BorderRadius.circular(10),
+  borderRadius: BorderRadius.circular(20),
   boxShadow: [
     BoxShadow(
       color: Colors.grey.withValues(alpha: 0.2),
@@ -184,7 +183,7 @@ final InputDecoration translatordecotion = InputDecoration(
   border: InputBorder.none,
   contentPadding: EdgeInsets.symmetric(horizontal: 20),
 );
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 final BoxDecoration greyDragHandleDecoration = BoxDecoration(
   color: greyColor.withAlpha(100),
   borderRadius: BorderRadius.circular(10),
@@ -194,3 +193,136 @@ final BoxDecoration roundedIconDecoration = BoxDecoration(
   color: iconbdcolor,
   borderRadius: BorderRadius.circular(8),
 );
+
+final BoxDecoration bottomNavDecoration = BoxDecoration(
+  boxShadow: [
+    BoxShadow(
+      color: Colors.black.withAlpha(51),
+      blurRadius: 6,
+      offset: const Offset(0, -2),
+    ),
+  ],
+);
+
+BoxDecoration featureImageDecoration(BuildContext context) {
+  return BoxDecoration(
+    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+    borderRadius: BorderRadius.circular(8),
+  );
+}
+BoxDecoration featureCardDecoration(BuildContext context) {
+  return BoxDecoration(
+    color: Theme.of(context).cardTheme.color,
+    borderRadius: BorderRadius.circular(20),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withAlpha(30),
+        blurRadius: 6,
+        offset: const Offset(0, 2),
+      ),
+    ],
+  );
+}
+
+BoxDecoration featureItemDecoration(BuildContext context) {
+  return BoxDecoration(
+    color: Theme.of(context).cardTheme.color,
+    borderRadius: BorderRadius.circular(12),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withAlpha(30),
+        blurRadius: 6,
+        offset: const Offset(0, 2),
+      ),
+    ],
+  );
+}
+BoxDecoration bottomControlsDecoration(BuildContext context) {
+  return BoxDecoration(
+    color: Theme.of(context).bottomSheetTheme.backgroundColor,
+    border: Border(
+      top: BorderSide(
+        color: Theme.of(context).dividerColor,
+        width: 1,
+      ),
+    ),
+  );
+}
+
+Color linearProgressBackground(BuildContext context) {
+  return Theme.of(context).dividerColor;
+}
+
+const TextStyle titleSmallNormal = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.normal,
+  color: blackTextColor,
+);
+
+ final TextStyle titleSmallSelected = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w600,
+  color: iconbdcolor,
+);
+// text styles
+final TextStyle voiceOptionTitleStyle = titleSmallStyle.copyWith(
+  fontWeight: FontWeight.normal,
+);
+
+
+TextStyle selectedVoiceOptionTitleStyle(BuildContext context) =>
+    titleSmallStyle.copyWith(
+      color: Theme.of(context).colorScheme.primary,
+      fontWeight: FontWeight.w600,
+      fontSize: mobileWidth(context) * 0.04,
+    );
+
+TextStyle unselectedVoiceOptionTitleStyle(BuildContext context) =>
+    titleSmallStyle.copyWith(
+      color: Theme.of(context).textTheme.bodyMedium?.color ?? blackTextColor,
+      fontWeight: FontWeight.normal,
+      fontSize: mobileWidth(context) * 0.04,
+    );
+
+
+EdgeInsets voiceOptionPadding(BuildContext context) => EdgeInsets.symmetric(
+  horizontal: mobileWidth(context) * 0.04,
+  vertical: mobileHeight(context) * 0.01,
+);
+
+
+double voiceOptionRadius(BuildContext context) => mobileWidth(context) * 0.03;
+
+
+List<BoxShadow> voiceOptionShadow(BuildContext context) => [
+  BoxShadow(
+    color: shadowColor.withOpacity(0.08),
+    blurRadius: mobileWidth(context) * 0.02,
+    offset: Offset(0, mobileHeight(context) * 0.002),
+  ),
+];
+BoxDecoration defaultCardDecoration(BuildContext context) => BoxDecoration(
+  color: Theme.of(context).cardTheme.color,
+  borderRadius: BorderRadius.circular(20),
+  boxShadow: [
+    BoxShadow(
+      color: shadowColor,
+      blurRadius: 10,
+      offset:Offset(0, 5),
+    ),
+  ],
+);
+
+BoxDecoration sliderDotDecoration(BuildContext context, bool isActive) {
+  return BoxDecoration(
+    shape: BoxShape.circle,
+    color: isActive
+        ? (Theme.of(context).brightness == Brightness.dark
+        ? kWhite
+        : kBlack)
+        : Theme.of(context).disabledColor.withValues(alpha: 0.3),
+  );
+}
+
+
+

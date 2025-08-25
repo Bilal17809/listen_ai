@@ -4,16 +4,15 @@ import 'package:just_audio/just_audio.dart';
 import '../../../core/local_storage/local_storage_service.dart';
 import '../../../core/utils/text_utils.dart';
 import '../../../data/services/tts_service.dart';
-import '../../settings/controller/settings_controller.dart';
 
 class ListenController extends GetxController {
   final TtsService _ttsService;
 
-  RxBool isPlaying = false.obs;
-  RxString currentText = "".obs;
-
-  List<String> _chunks = [];
+  final isPlaying = false.obs;
+  final currentText = ''.obs;
+  late List<String> _chunks;
   int _currentChunkIndex = 0;
+  bool _isCompleted = false;
 
   ListenController(this._ttsService);
 
@@ -23,49 +22,34 @@ class ListenController extends GetxController {
     _setupAudioListeners();
   }
 
-  // void _setupAudioListeners() {
-  //   _ttsService.audioPlayer.onPlayerStateChanged.listen((state) {
-  //     isPlaying.value = state == PlayerState.playing;
-  //   });
-  //
-  //   _ttsService.audioPlayer.onPlayerComplete.listen((event) async {
-  //     if (_currentChunkIndex < _chunks.length - 1) {
-  //       _currentChunkIndex++;
-  //       await _playCurrentChunk();
-  //     } else {
-  //       isPlaying.value = false;
-  //       _currentChunkIndex = 0;
-  //       await _ttsService.stop();
-  //     }
-  //   });
-  // }
-
   void _setupAudioListeners() {
     _ttsService.audioPlayer.playerStateStream.listen((state) async {
-      // Playing / paused state
       isPlaying.value = state.playing;
 
-      // Audio completed
       if (state.processingState == ProcessingState.completed) {
         if (_currentChunkIndex < _chunks.length - 1) {
           _currentChunkIndex++;
           await _playCurrentChunk();
         } else {
-          isPlaying.value = false;
-          _currentChunkIndex = 0;
-          await _ttsService.stop();
+          await _handlePlaybackCompletion();
         }
       }
     });
   }
 
+  Future<void> _handlePlaybackCompletion() async {
+    await _ttsService.stop();
+    isPlaying.value = false;
+    _isCompleted = true;
+  }
 
   Future<void> prepareText(String text) async {
-    if (text.isEmpty) return;
+    if (text.trim().isEmpty) return;
 
     currentText.value = text;
     _chunks = TextUtils.splitText(text);
     _currentChunkIndex = 0;
+    _isCompleted = false;
 
     if (_chunks.isNotEmpty) {
       await _playCurrentChunk();
@@ -73,30 +57,22 @@ class ListenController extends GetxController {
   }
 
   Future<void> _playCurrentChunk() async {
-    if (_currentChunkIndex < _chunks.length) {
-      final url = TtsService.getTtsUrl(_chunks[_currentChunkIndex]);
-
-
-      final savedVoice = await LocalStorageService.getString('selected_voice');
-      final voice = savedVoice ?? 'male';
-
-      await _ttsService.playFromUrl(url, voice: voice);
-
-      print("🎙 Playing chunk with voice: $voice");
-    }
+    if (_currentChunkIndex >= _chunks.length) return;
+    final chunk = _chunks[_currentChunkIndex];
+    final url = TtsService.getTtsUrl(chunk);
+    final selectedVoice = await LocalStorageService.getSelectedVoice();
+    await _ttsService.playFromUrl(url, voice: selectedVoice);
   }
-
-
-
 
   Future<void> play() async {
     if (_chunks.isEmpty) return;
 
-    if (!isPlaying.value) {
-      if (_currentChunkIndex >= _chunks.length) {
-        _currentChunkIndex = 0;
-      }
+    if (_isCompleted) {
+      _currentChunkIndex = 0;
+      _isCompleted = false;
       await _playCurrentChunk();
+    } else {
+      await _ttsService.resume();
     }
   }
 
@@ -107,8 +83,19 @@ class ListenController extends GetxController {
   Future<void> stop() async {
     await _ttsService.stop();
     _currentChunkIndex = 0;
+    _isCompleted = false;
     isPlaying.value = false;
   }
+
+  Future<void> togglePlayPause() async {
+    if (isPlaying.value) {
+      await pause();
+    } else {
+      await play();
+    }
+  }
+
+  bool get isPlaybackComplete => _isCompleted;
 
   @override
   void onClose() {

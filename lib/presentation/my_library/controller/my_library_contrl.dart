@@ -35,6 +35,16 @@ class MyLibraryController extends GetxController {
         ) ,
       );
     }
+    else{
+      Get.showSnackbar(
+        const GetSnackBar(
+          message: "Already saved in library ✅",
+          duration: Duration(seconds: 1),
+          borderRadius: 8,
+          margin: EdgeInsets.all(12),
+        ) ,
+      );
+    }
     return addedItem;
   }
 

@@ -1,104 +1,126 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/constant/constant.dart';
+import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_styles.dart';
+import '../../bottom_nav/view/bottom_nav.dart';
 import '../controller/settings_controller.dart';
+import 'setting.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SettingsController controller = Get.find<SettingsController>();
+    final SettingsController settingsController = Get.find<SettingsController>();
 
     return Scaffold(
-      backgroundColor: kWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kWhite,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         elevation: 1,
         centerTitle: true,
         title: Text(
           "Settings",
-          style: titleLargeStyle.copyWith(
-            color: primaryColor,
+          style: TextStyle(
+            fontSize: mobileWidth(context) * 0.05,
             fontWeight: FontWeight.w600,
+            color: Theme.of(context).appBarTheme.titleTextStyle?.color ?? iconbdcolor,
           ),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios,
+              color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black87),
+          onPressed: () async {
+            Get.offNamed(AppRoutes.home);
+          },
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Speaker Voice",
-              style: titleMediumStyle.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Obx(() {
-              return Column(
+      body: Obx(() {
+        if (settingsController.isLoading) {
+          return Center(
+            child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary),
+          );
+        }
+
+        return SingleChildScrollView(
+          padding: EdgeInsets.all(mobileWidth(context) * 0.04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SectionHeader(title: "Theme"),
+              SizedBox(height: mobileHeight(context) * 0.02),
+              Column(
                 children: [
-                  _buildVoiceOption(
-                    controller: controller,
-                    title: "Female",
-                    value: "female",
-                    groupValue: controller.selectedVoice,
-                    onTap: () => controller.setVoice("female"),
+                  ThemeOption(
+                    title: "Light Mode",
+                    isSelected: !settingsController.isDarkMode,
+                    onTap: settingsController.toggleTheme,
                   ),
-                  const SizedBox(height: 12),
-                  _buildVoiceOption(
-                    controller: controller,
-                    title: "Male",
-                    value: "male",
-                    groupValue: controller.selectedVoice,
-                    onTap: () => controller.setVoice("male"),
+                  SizedBox(height: mobileHeight(context) * 0.015),
+                  ThemeOption(
+                    title: "Dark Mode",
+                    isSelected: settingsController.isDarkMode,
+                    onTap: settingsController.toggleTheme,
                   ),
                 ],
-              );
-            }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildVoiceOption({
-    required SettingsController controller,
-    required String title,
-    required String value,
-    required String groupValue,
-    required VoidCallback onTap,
-  }) {
-    final bool isSelected = groupValue == value;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: isSelected ? primaryColor.withOpacity(0.1) : kWhite,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: isSelected ? primaryColor : greyBorderColor,
-            width: isSelected ? 2 : 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? primaryColor : greyColor,
-            ),
-            const SizedBox(width: 12),
-            Text(
-              title,
-              style: titleSmallStyle.copyWith(
-                color: isSelected ? primaryColor : blackTextColor,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
-            ),
-          ],
+              SizedBox(height: mobileHeight(context) * 0.03),
+              const SectionHeader(title: "Speaker Voice"),
+              SizedBox(height: mobileHeight(context) * 0.02),
+              Column(
+                children: [
+                  VoiceOption(
+                    title: "Female Voice",
+                    value: "female",
+                    groupValue: settingsController.selectedVoice,
+                    onTap: () => settingsController.setVoice("female"),
+                  ),
+                  SizedBox(height: mobileHeight(context) * 0.015),
+                  VoiceOption(
+                    title: "Male Voice",
+                    value: "male",
+                    groupValue: settingsController.selectedVoice,
+                    onTap: () => settingsController.setVoice("male"),
+                  ),
+                ],
+              ),
+              SizedBox(height: mobileHeight(context) * 0.03),
+              const SectionHeader(title: "Volume Level"),
+              SizedBox(height: mobileHeight(context) * 0.02),
+              SliderSetting(
+                label: "Volume",
+                value: settingsController.volumeLevel,
+                onChanged: settingsController.setVolume,
+                min: 0.0,
+                max: 1.0,
+                divisions: 10,
+              ),
+              SizedBox(height: mobileHeight(context) * 0.03),
+              const SectionHeader(title: "Speech Speed"),
+              SizedBox(height: mobileHeight(context) * 0.02),
+              SliderSetting(
+                label: "Speed",
+                value: settingsController.speechSpeed,
+                onChanged: settingsController.setSpeechSpeed,
+                min: 0.5,
+                max: 2.0,
+                divisions: 15,
+              ),
+            ],
+          ),
+        );
+      }),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).bottomSheetTheme.backgroundColor,
+          boxShadow: [BoxShadow(
+            color: Colors.black.withAlpha(51),
+            blurRadius: 6,
+            offset: const Offset(0, -2),
+          )],
         ),
+        child: MainBottomBar(),
       ),
     );
   }

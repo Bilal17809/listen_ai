@@ -1,7 +1,10 @@
 import 'package:just_audio/just_audio.dart';
+import 'package:get/get.dart';
+import '../../presentation/settings/controller/settings_controller.dart';
 
 class TtsService {
   final AudioPlayer _audioPlayer = AudioPlayer();
+  final SettingsController _settingsController = Get.find<SettingsController>();
 
   AudioPlayer get audioPlayer => _audioPlayer;
 
@@ -14,17 +17,21 @@ class TtsService {
     try {
       await _audioPlayer.stop();
 
+
       if (voice == 'male') {
-        await _audioPlayer.setSpeed(1.0);
-        await _audioPlayer.setPitch(0.7);
+        await _audioPlayer.setPitch(0.8);
       } else {
-        await _audioPlayer.setSpeed(1.0);
         await _audioPlayer.setPitch(1.2);
       }
 
+      await _audioPlayer.setVolume(_settingsController.volumeLevel);
+      await _audioPlayer.setSpeed(_settingsController.speechSpeed);
+
       await _audioPlayer.setUrl(url);
       await _audioPlayer.play();
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
 
   Future<void> resume() async {

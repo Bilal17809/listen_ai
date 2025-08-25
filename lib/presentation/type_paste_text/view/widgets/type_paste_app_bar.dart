@@ -11,19 +11,20 @@ class TypePasteAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
-    onPressed: () async {
-
-    Get.offNamed(AppRoutes.home);
-    }),
-      backgroundColor: appBarBgColor,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios,
+            color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black87),
+        onPressed: () async {
+          Get.offNamed(AppRoutes.home);
+        },
+      ),
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 2,
       centerTitle: true,
       title: Text(
         "✍ Type & Paste Text",
         style: titleLargeStyle.copyWith(
-          color: primaryColor,
+          color: Theme.of(context).brightness == Brightness.dark ? kWhite : kBlack,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,
           fontSize: mobileHeight(context) * 0.03,

@@ -14,7 +14,17 @@ class TextFieldContainer extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(mobileWidth(context) * 0.04),
-        decoration: roundedDecoration,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardTheme.color,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withAlpha(30),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
         child: TextField(
           controller: controller.textController,
           maxLines: null,
@@ -24,12 +34,12 @@ class TextFieldContainer extends StatelessWidget {
             hintText: "Type or paste text here...",
             border: InputBorder.none,
             hintStyle: bodyMediumStyle.copyWith(
-              color: greyColor,
+              color: Theme.of(context).hintColor,
               fontSize: mobileHeight(context) * 0.018,
             ),
           ),
           style: bodyMediumStyle.copyWith(
-            color: blackTextColor,
+            color: Theme.of(context).textTheme.bodyMedium?.color ?? blackTextColor,
             height: 1.5,
             fontSize: mobileHeight(context) * 0.018,
           ),

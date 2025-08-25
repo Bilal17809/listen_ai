@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:listen_ai/core/theme/theme.dart';
+import '../../../../core/constant/constant.dart';
+import '../../../../core/theme/theme.dart';
 import '../../../../data/models/library_item.dart';
 import '../../controller/my_library_contrl.dart';
 import 'delete_dialog.dart';
@@ -20,26 +21,40 @@ class LibraryItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 12.0),
-      elevation: 2.0,
+      margin: EdgeInsets.only(bottom: mobileHeight(context) * 0.015),
+      elevation: 2,
+      color: Theme.of(context).cardTheme.color,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(mobileWidth(context) * 0.025),
       ),
       child: ListTile(
-        contentPadding:
-        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: mobileWidth(context) * 0.04,
+          vertical: mobileHeight(context) * 0.012,
+        ),
         title: Text(
           item.title,
-          style: titleSmallStyle.copyWith(fontWeight: FontWeight.w500),
+          style: titleSmallStyle.copyWith(
+            fontSize: mobileWidth(context) * 0.04,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).textTheme.bodyMedium?.color,
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
           "Saved: ${item.savedAt.toLocal().toString().split('.').first}",
-          style: bodySmallStyle.copyWith(color: textGreyColor),
+          style: bodySmallStyle.copyWith(
+            fontSize: mobileWidth(context) * 0.032,
+            color: Theme.of(context).textTheme.bodySmall?.color ?? textGreyColor,
+          ),
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.delete, color: kRed),
+          icon: Icon(
+            Icons.delete,
+            size: mobileWidth(context) * 0.06,
+            color: Theme.of(context).colorScheme.error,
+          ),
           onPressed: () {
             Get.dialog(
               DeleteDialog(

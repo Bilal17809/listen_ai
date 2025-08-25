@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theme/app_colors.dart';
-
 
 class CameraProcessingDialog extends StatelessWidget {
   const CameraProcessingDialog({super.key});
@@ -11,13 +9,17 @@ class CameraProcessingDialog extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: kWhite,
+          color: Theme.of(context).dialogTheme.backgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircularProgressIndicator(),
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ],
         ),
       ),
